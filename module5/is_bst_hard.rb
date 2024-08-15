@@ -1,3 +1,5 @@
+# In this problem you are going to solve the same problem as the previous one, but for a more general case, when binary search tree may contain equal keys.
+# A Node class represents a node in a binary tree.
 class Node
   attr_accessor :key, :left, :right
 
@@ -7,7 +9,9 @@ class Node
     @right = right
   end
 end
-
+# Checks if the given binary tree is a Binary Search Tree (BST).
+# Duplicate keys should always be in the right subtree of the first duplicated element.
+# This function uses an iterative in-order traversal with a stack to verify the BST property.
 def is_bst(tree)
   return true if tree.empty?
 

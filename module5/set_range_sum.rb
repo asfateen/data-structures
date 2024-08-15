@@ -1,3 +1,8 @@
+# In this problem, your goal is to implement a data structure to store a set of integers and quickly compute range sums.
+
+# Represents a vertex (node) in the splay tree.
+# Each vertex holds a key, the sum of the subtree rooted at this vertex, 
+# and pointers to its left and right children, as well as its parent.
 class Vertex
   attr_accessor :key, :sum, :left, :right, :parent
 
@@ -10,13 +15,17 @@ class Vertex
   end
 end
 
+# Updates the sum of the given vertex and its children.
+# Sets the parent pointer for the left and right children of the vertex.
+#
 def update(v)
   return if v.nil?
   v.sum = v.key + (v.left.nil? ? 0 : v.left.sum) + (v.right.nil? ? 0 : v.right.sum)
   v.left.parent = v unless v.left.nil?
   v.right.parent = v unless v.right.nil?
 end
-
+# Performs a small rotation (single rotation) to maintain the splay tree properties.
+#
 def smallRotation(v)
   parent = v.parent
   return if parent.nil?
@@ -41,6 +50,8 @@ def smallRotation(v)
     end
   end
 end
+# Performs a big rotation (double rotation) to maintain the splay tree properties.
+#
 
 def bigRotation(v)
   if v.parent.left == v && v.parent.parent.left == v.parent
@@ -54,7 +65,7 @@ def bigRotation(v)
     smallRotation(v)
   end
 end
-
+# Splays the given vertex to the root of the splay tree.
 def splay(v)
   return nil if v.nil?
   until v.parent.nil?
@@ -67,6 +78,9 @@ def splay(v)
   v
 end
 
+# Finds the vertex with the closest key greater than or equal to the given key,
+# and splay the last visited vertex to the root.
+#
 def find(root, key)
   v = root
   last = root
@@ -83,6 +97,10 @@ def find(root, key)
   [next_v, root]
 end
 
+# Splits the tree into two trees based on the given key.
+# The first tree contains all nodes with keys less than the given key,
+# and the second tree contains all nodes with keys greater than or equal to the given key.
+#
 def split(root, key)
   result, root = find(root, key)
   return [root, nil] if result.nil?
@@ -97,6 +115,9 @@ def split(root, key)
   [left, right]
 end
 
+# Merges two trees into one tree.
+# The first tree is merged as the left subtree, and the second tree is merged as the right subtree.
+#
 def merge(left, right)
   return right if left.nil?
   return left if right.nil?
@@ -109,13 +130,16 @@ def merge(left, right)
   right
 end
 
+# Inserts a key into the splay tree.
+#
 def insert(x)
   left, right = split($root, x)
   new_vertex = nil
   new_vertex = Vertex.new(x, x) if right.nil? || right.key != x
   $root = merge(merge(left, new_vertex), right)
 end
-
+# Removes a key from the splay tree.
+#
 def erase(x)
   left, middle = split($root, x)
   middle ,right = split(middle, x + 1)
@@ -124,11 +148,15 @@ def erase(x)
   $root = merge(left, right)
 end
 
+# Searches for a key in the splay tree.
+#
 def search(x)
   node, $root = find($root, x)
   !node.nil? && node.key == x
 end
 
+# Computes the sum of the keys in the range [fr, to] in the splay tree.
+#
 def sum(fr, to)
   left, middle = split($root, fr)
   middle, right = split(middle, to + 1)

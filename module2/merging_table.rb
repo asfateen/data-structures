@@ -1,3 +1,8 @@
+# In this problem, your goal is to simulate a sequence of merge operations with tables in a database.
+
+# The Database class models a collection of tables in a database where tables can be merged.
+# It keeps track of the number of rows in each table, the parent relationships for table merging,
+# and the rank for efficient union operations.
 class Database
   attr_reader :max_row_count
   def initialize(row_counts)
@@ -8,6 +13,7 @@ class Database
     @rank = [0] * @n_tables
   end
 
+  # Finds the representative parent of the table with path compression.
   def findParent(i)
     unless i == @parent[i]
       @parent[i] = findParent(@parent[i])
@@ -15,6 +21,7 @@ class Database
     @parent[i]
   end
 
+  # Merges two tables, combining their row counts and updating the maximum row count.
   def mergeTables(destination, source)
     source_parent = findParent(source)
     destination_parent = findParent(destination)

@@ -1,12 +1,19 @@
+# In this problem you will implement a program to simulate the processing of network packets.
+
+# A struct representing a request with its arrival time and time required for processing.
 Request = Struct.new(:arrived_at, :time_to_process)
+
+# A struct representing a response with a flag indicating if the request was dropped and the start time of processing.
 Response = Struct.new(:was_dropped, :started_at)
 
+# A class representing a buffer that processes network packets.
 class Buffer
   def initialize(size)
     @size = size
     @finish_time = []
   end
 
+  # Processes a request and returns a response.
   def process(request)
     @finish_time.shift while !@finish_time.empty? && @finish_time.first <= request.arrived_at
 
@@ -22,6 +29,7 @@ class Buffer
   end
 end
 
+# Processes a list of requests using a given buffer.
 def process_requests(requests, buffer)
   responses = []
   requests.each do |request|

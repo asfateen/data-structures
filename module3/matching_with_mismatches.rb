@@ -1,4 +1,6 @@
+#A natural generalization of the pattern matching problem is the following: find all text locations where dis- tance from pattern is sufficiently small
 
+# Calculates the hash table for a given string.
 def hash_table(s, prime, x)
   return [] if s.nil? || s.empty?
 
@@ -9,16 +11,21 @@ def hash_table(s, prime, x)
   hash_table
 end
 
+# Computes the hash value for a substring of length `length` starting at `start` in the original string.
 def hash_value(hash_table, prime, x, start, length)
   y = x.pow(length, prime)
   (hash_table[start + length] - y * hash_table[start]) % prime
 end
 
+# Precomputes the hash tables for both the text and the pattern.
 def pre_compute(text, pattern)
   h1 = hash_table(text, $m, $x)
   h2 = hash_table(pattern, $m, $x)
   [h1, h2]
 end
+
+# Checks if the substring starting at `a_start` and the pattern `p`
+# match with at most `k` mismatches, using a divide-and-conquer approach.
 
 def check_match(a_start, length, p_len, k)
   stack = []
@@ -51,6 +58,7 @@ def check_match(a_start, length, p_len, k)
   count <= k
 end
 
+# Solves the pattern matching problem for a given text and pattern with allowed mismatches.
 def solve(t, p, k)
   return [] if t.nil? || p.nil? || t.empty? || p.empty?
 

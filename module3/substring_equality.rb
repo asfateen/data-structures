@@ -1,3 +1,6 @@
+# In this problem, you will use hashing to design an algorithm that is able to preprocess a given string 𝑠 to answer any query of the form “are these two substrings of 𝑠 equal?” efficiently.
+
+# Computes hash values for prefixes of a string using a polynomial hash function.
 def hash_table(s, prime, x)
   hash_table = Array.new(s.length + 1, 0)
   (1..s.length).each do |i|
@@ -6,12 +9,14 @@ def hash_table(s, prime, x)
   hash_table
 end
 
+# Computes the hash value of a substring from a precomputed hash table.
 def hash_value(hash_table, prime, x, start, length)
   y = x.pow(length, prime)
   hash_value = (hash_table[start + length] - y * hash_table[start]) % prime
   hash_value
 end
 
+# Compares two substrings from different positions to check if they are equal.
 def are_equal(table1, table2, prime1, prime2, x, a, b, l)
   a_hash1 = hash_value(table1, prime1, x, a, l)
   a_hash2 = hash_value(table2, prime2, x, a, l)

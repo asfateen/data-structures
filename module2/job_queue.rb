@@ -1,5 +1,9 @@
+# In this problem you will simulate a program that processes a list of jobs in parallel.
+
+# A structure to represent an assigned job with the worker index and the time it started.
 AssignedJob = Struct.new(:worker, :started_at)
 
+# A class that manages job assignments to workers using a min-heap to track the next available worker.
 class JobQueue
   attr_reader :assigned_jobs
   def initialize(n_workers, jobs)
@@ -41,6 +45,7 @@ class JobQueue
       end
   end
 
+  # Assigns the next job to the worker that becomes available the earliest.
   def nextWorker(job)
     root = @finish_time[0]
     next_worker = root[0]
@@ -51,6 +56,7 @@ class JobQueue
   end
 end
 
+# Assigns jobs to workers using a JobQueue to track worker availability efficiently.
 def assign_jobs(n_workers, jobs)
   job_queue = JobQueue.new(n_workers, jobs)
   jobs.each {|job| job_queue.nextWorker(job)}

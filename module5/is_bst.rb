@@ -1,3 +1,6 @@
+# In this problem you are going to test whether a binary search tree data structure from some programming language library was implemented correctly.
+
+# The BinaryTree class represents a binary tree with methods to add nodes and check if the tree is a Binary Search Tree (BST).
 class BinaryTree
   attr_accessor :nodes
 
@@ -8,6 +11,9 @@ class BinaryTree
   def add_node(key, left, right)
     @nodes << { key: key, left: left, right: right }
   end
+
+  # Checks if the binary tree is a Binary Search Tree (BST) 
+  # This method uses an iterative in-order traversal to verify the BST property.
 
   def is_bst?
     return true if @nodes.empty?

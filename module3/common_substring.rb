@@ -1,6 +1,11 @@
+# In this problem, your goal is to use hashing to solve the longest common substring problem in almost linear time.
+
+# Constants used for polynomial hashing
 PRIME1 = 1_000_000_007
 PRIME2 = 1_000_004_249
 X = 263
+
+# Computes the polynomial hash of a given string.
 def poly_hash(s, prime, multiplier)
   hash_value = 0
   (s.length - 1).downto(0) do |i|
@@ -9,6 +14,7 @@ def poly_hash(s, prime, multiplier)
   hash_value
 end
 
+# Computes the hash table for all substrings of a given length in a string.
 def hash_table(s, p_len, prime, multiplier)
   h = Array.new(s.length - p_len + 1) { [] }
   substring = s[-p_len..-1]
@@ -20,6 +26,7 @@ def hash_table(s, p_len, prime, multiplier)
   h
 end
 
+# Computes a dictionary of hashes for all substrings of a given length in a string.
 def hash_dict(s, p_len, prime, multiplier)
   d = {}
   substring = s[-p_len..-1]
@@ -34,6 +41,7 @@ def hash_dict(s, p_len, prime, multiplier)
   d
 end
 
+# Searches for matching substrings between two hash tables.
 def search_substring(hash_table, hash_dict)
   check = false
   matches = {}
@@ -47,6 +55,7 @@ def search_substring(hash_table, hash_dict)
   [check, matches]
 end
 
+# Performs a binary search to find the maximum length of a common substring between two strings.
 def max_length(string_a, string_b, low, high, max_length, a_start, b_start)
   mid = (low + high) / 2
   return [a_start, b_start, max_length] if low > high

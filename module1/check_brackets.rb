@@ -1,9 +1,15 @@
+# In this problem you will implement a feature for a text editor to find errors in the usage of brackets in the code
+
+# A struct representing a bracket with its character and position.
 Bracket = Struct.new(:char, :position)
+
+# Checks if a pair of brackets are matching.
 
 def are_matching(left, right)
   ["()", "[]", "{}"].include?(left + right)
 end
 
+# Finds the first mismatch in the string of brackets.
 def find_mismatch(text)
   opening_brackets_stack = []
   text.each_char.with_index(1) do |char, i|

@@ -1,3 +1,8 @@
+# In this problem you will implement a simple phone book manager.
+
+# Represents a single query in the phone book manager.
+# Each query has a type (add, delete, or find), a number,
+# and optionally a name if the query type is 'add'.
 class Query
   attr_accessor :name
   attr_reader :type, :number 
@@ -10,15 +15,18 @@ class Query
 
 end
 
+# Reads a set of queries from standard input.
 def read_queries()
   n = gets.to_i
   Array.new(n){Query.new(gets.split)}
 end
 
+# Outputs the results of processing queries to standard output.
 def write_responses(result)
   puts result.join("\n")
 end
 
+# Processes a list of queries to perform operations on a phonebook.
 def process_queries(queries)
   result = []
   contacts = {}

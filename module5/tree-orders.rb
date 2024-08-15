@@ -1,4 +1,8 @@
+# In this problem you will implement in-order, pre-order and post-order traversals of a binary tree
+
+# The TreeOrders class represents a binary tree and provides methods for different types of tree traversals.
 class TreeOrders
+  # Reads the binary tree structure from standard input.
   def read()
     @n = ARGF.readline.to_i
     @key = [nil] * @n
@@ -11,6 +15,7 @@ class TreeOrders
     end
   end
 
+  # Performs an in-order traversal of the binary tree.
   def inOrderTraversal
     return [] if @n == 0
     result = []
@@ -30,6 +35,7 @@ class TreeOrders
 
     result
   end
+  # Performs a pre-order traversal of the binary tree.
 
   def preOrderTraversal
     return [] if @n == 0
@@ -46,6 +52,7 @@ class TreeOrders
     result
   end
 
+  # Performs a post-order traversal of the binary tree.
   def postOrderTraversal
     return [] if @n == 0
     result = []

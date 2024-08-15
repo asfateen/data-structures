@@ -1,3 +1,6 @@
+# In this problem you will implement Rope — data structure that can store a string and efficiently cut a part (a substring) of this string and insert it in a different position. This data structure can be enhanced to become persistent — that is, to allow access to the previous versions of the string. These properties make it a suitable choice for storing the text in text editors.
+
+# adapted from this python implementation by Ivan Lazarevic https://github.com/ivanbgd/Rope-Data-Structure/blob/master/rope_data_structure.py
 class Node
   attr_accessor :value, :parent, :left, :right, :size
 
@@ -18,6 +21,7 @@ class Node
   end
 end
 
+# Implements a splay tree to manage nodes in the Rope data structure.
 class SplayTree
   attr_accessor :root, :size
 
@@ -25,7 +29,9 @@ class SplayTree
     @root = nil
     @size = 0
   end
-
+  
+  # Performs an in-order traversal of the splay tree.
+  #
   def in_order
     return '' unless @root
 
@@ -48,6 +54,8 @@ class SplayTree
     result.join
   end
 
+  # Performs a level-order traversal of the splay tree.
+  #
   def level_order
     return [] unless @root
 
@@ -63,7 +71,9 @@ class SplayTree
 
     result
   end
-
+  
+  # Performs a right rotation around the given node.
+  #
   def rotate_right(node)
     parent = node.parent
     y = node.left
@@ -90,6 +100,8 @@ class SplayTree
     y.size = (y.left&.size || 0) + (y.right&.size || 0) + 1
   end
 
+  # Performs a left rotation around the given node.
+  #
   def rotate_left(node)
     parent = node.parent
     x = node.right
@@ -116,6 +128,8 @@ class SplayTree
     x.size = (x.left&.size || 0) + (x.right&.size || 0) + 1
   end
 
+  # Splays the given node to the root of the splay tree.
+  #
   def splay(node)
     return unless node
 
@@ -145,6 +159,8 @@ class SplayTree
     end
   end
 
+  # Finds the node with the given rank in 0-based indexing.
+  #
   def order_statistic_zero_based_ranking(k)
     raise 'Index out of bounds' unless (0...@size).cover?(k)
 

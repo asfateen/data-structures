@@ -1,7 +1,10 @@
+# In this problem, you goal will be to implement a stack that also supports finding the maximum value and to ensure that all operations still work in constant time.
+
+# A class that implements a stack with a `max` operation that returns the maximum element in the stack in O(1) time.
 class StackWithMax
   def initialize
-    @stack = []
-    @max_stack = []
+    @stack = [] # The main stack to store all elements.
+    @max_stack = [] # A stack to store the maximum values.
   end
 
   def push(a)

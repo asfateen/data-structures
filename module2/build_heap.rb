@@ -1,3 +1,7 @@
+# In this problem you will convert an array of integers into a heap.
+
+
+# A naive (given) approach to building a min-heap.
 
 def naive_build_heap(data)
   swaps = []
@@ -12,6 +16,7 @@ def naive_build_heap(data)
   swaps
 end
 
+# An optimized approach to building a min-heap using the sift-down method.
 def build_heap(data)
   swaps = []
   n = data.length
@@ -22,7 +27,8 @@ def build_heap(data)
 
   swaps
 end
-  
+
+# Performs the sift-down operation to maintain the heap property.
 def sift_down(i, data, swaps)
   min_index = i
   left = 2 * i + 1

@@ -1,5 +1,11 @@
+
+# In this problem, your goal is to implement the Rabin–Karp’s algorithm.
+
+# Constants for the Rabin-Karp algorithm
 PRIME = 1000000007
 MULTIPLIER = 236
+
+# Computes the polynomial hash of a given string.
 def poly_hash(string, prime, multiplier)
   hash_value = 0
   (string.length - 1).downto(0) do |i|
@@ -8,6 +14,7 @@ def poly_hash(string, prime, multiplier)
   hash_value
 end
 
+# Precomputes hash values for all substrings of the given length in the text.
 def precomputed_hashes(text, pattern, prime, multiplier)
   t = text.length
   p = pattern.length
@@ -24,6 +31,7 @@ def precomputed_hashes(text, pattern, prime, multiplier)
   h
 end
 
+# Implements the Rabin-Karp algorithm to find all occurrences of the pattern in the text.
 def rabin_karp(text, pattern)
   t = text.length
   p = pattern.length

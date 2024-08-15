@@ -1,4 +1,5 @@
-
+# In this problem, your goal is to get used to trees. You will need to read a description of a tree from the input, implement the tree data structure, store the tree and compute its height.
+# A class that represents a tree and computes its height.
 class TreeHeight
   def read
     @n = gets.to_i
@@ -16,6 +17,7 @@ class TreeHeight
 
   end
 
+  # Computes the height of the tree using BFS
   def compute_height
     height = 0
     queue = [[@root, 1]] # Each element in the queue is [node, current_height]
